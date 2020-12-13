@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 import firebase from "./firebase";
+import { createUser } from "./db";
 
 const authContext = createContext();
 
@@ -20,6 +21,7 @@ function useProvideAuth() {
     setLoading(false);
     if (rawUser) {
       const user = formatUser(rawUser);
+      createUser(user.uid, user);
       setUser(user);
       return user;
     } else {
