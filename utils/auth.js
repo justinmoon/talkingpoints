@@ -46,7 +46,6 @@ function useProvideAuth() {
   };
 
   useEffect(() => {
-    console.log("useEffect");
     const unsubscribe = firebase.auth().onAuthStateChanged(handleUser);
     return () => unsubscribe();
     // return unsubscribe;
