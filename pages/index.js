@@ -6,6 +6,7 @@ export default function Index() {
   const isPaidAccount = auth.user?.stripeRole !== "free"
   return auth.user ? (
     <div>
+      <p>Newest</p>
       <p>Email: {auth.user.email}</p>
       <p>Paid: {isPaidAccount}</p>
       <button onClick={(e) => auth.signout()}>Sign Out</button>
