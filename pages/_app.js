@@ -1,6 +1,6 @@
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
-import { AuthProvider } from "utils/auth";
-import theme from "styles/theme";
+import { ThemeProvider, CSSReset } from "@chakra-ui/core"
+import { AuthProvider } from "utils/auth"
+import theme from "styles/theme"
 
 const App = ({ Component, pageProps }) => {
   return (
@@ -10,7 +10,7 @@ const App = ({ Component, pageProps }) => {
         <Component {...pageProps} />
       </AuthProvider>
     </ThemeProvider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

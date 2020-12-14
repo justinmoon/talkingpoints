@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Text } from "@chakra-ui/core";
+import React from "react"
+import { Box, Text } from "@chakra-ui/core"
 
 export const Th = (props) => (
   <Text
@@ -11,7 +11,7 @@ export const Th = (props) => (
     px={4}
     {...props}
   />
-);
+)
 
 export const Td = (props) => (
   <Box
@@ -22,7 +22,7 @@ export const Td = (props) => (
     borderBottomColor="gray.100"
     {...props}
   />
-);
+)
 
 export const Tr = (props) => (
   <Box
@@ -35,7 +35,7 @@ export const Tr = (props) => (
     height="40px"
     {...props}
   />
-);
+)
 
 export const Table = (props) => {
   return (
@@ -49,5 +49,5 @@ export const Table = (props) => {
       boxShadow="0px 4px 10px rgba(0, 0, 0, 0.05)"
       {...props}
     />
-  );
-};
+  )
+}

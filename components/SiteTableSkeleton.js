@@ -1,6 +1,6 @@
-import React from "react";
-import { Box, Skeleton } from "@chakra-ui/core";
-import { Table, Tr, Th, Td } from "./Table";
+import React from "react"
+import { Box, Skeleton } from "@chakra-ui/core"
+import { Table, Tr, Th, Td } from "./Table"
 
 const SkeletonRow = ({ width }) => (
   <Box as="tr">
@@ -17,7 +17,7 @@ const SkeletonRow = ({ width }) => (
       <Skeleton height="10px" w={width} my={4} />
     </Td>
   </Box>
-);
+)
 
 const SiteTableSkeleton = () => {
   return (
@@ -39,7 +39,7 @@ const SiteTableSkeleton = () => {
         <SkeletonRow width="75px" />
       </tbody>
     </Table>
-  );
-};
+  )
+}
 
-export default SiteTableSkeleton;
+export default SiteTableSkeleton

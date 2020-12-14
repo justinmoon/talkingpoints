@@ -1,50 +1,50 @@
-import { useRef, useState } from "react";
-import { useRouter } from "next/router";
-import { Box, FormControl, FormLabel, Input, Button } from "@chakra-ui/core";
+import { useRef, useState } from "react"
+import { useRouter } from "next/router"
+import { Box, FormControl, FormLabel, Input, Button } from "@chakra-ui/core"
 
-import { useAuth } from "utils/auth";
-import { getAllFeedback, getAllSites } from "utils/db-admin";
-import { createFeedback } from "utils/db";
-import Feedback from "components/Feedback";
+import { useAuth } from "utils/auth"
+import { getAllFeedback, getAllSites } from "utils/db-admin"
+import { createFeedback } from "utils/db"
+import Feedback from "components/Feedback"
 
 export async function getStaticProps(context) {
-  const siteId = context.params.siteId;
-  const { feedback } = await getAllFeedback(siteId);
-  console.log("props", feedback);
+  const siteId = context.params.siteId
+  const { feedback } = await getAllFeedback(siteId)
+  console.log("props", feedback)
   return {
     props: {
       initialFeedback: feedback,
     },
     revalidate: 1,
-  };
+  }
 }
 
 export async function getStaticPaths() {
-  const { sites } = await getAllSites();
+  const { sites } = await getAllSites()
   const paths = sites.map((site) => ({
     params: {
       siteId: site.id.toString(),
     },
-  }));
+  }))
   return {
     paths,
     fallback: true,
-  };
+  }
 }
 
 const FeedbackPage = ({ initialFeedback }) => {
   if (initialFeedback == undefined) {
-    return <div />;
+    return <div />
   }
-  const router = useRouter();
-  const auth = useAuth();
-  const inputEl = useRef(null);
-  const [allFeedback, setAllFeedback] = useState(initialFeedback);
-  console.log(allFeedback);
+  const router = useRouter()
+  const auth = useAuth()
+  const inputEl = useRef(null)
+  const [allFeedback, setAllFeedback] = useState(initialFeedback)
+  console.log(allFeedback)
 
   const onSubmit = (e) => {
-    console.log("allFeedback", allFeedback);
-    e.preventDefault();
+    console.log("allFeedback", allFeedback)
+    e.preventDefault()
     const newFeedback = {
       author: auth.user.name,
       authorId: auth.user.uid,
@@ -53,11 +53,11 @@ const FeedbackPage = ({ initialFeedback }) => {
       createdAt: new Date().toISOString(),
       provider: auth.user.provider,
       status: "pending",
-    };
-    inputEl.current.value = "";
-    setAllFeedback([newFeedback, ...allFeedback]);
-    createFeedback(newFeedback);
-  };
+    }
+    inputEl.current.value = ""
+    setAllFeedback([newFeedback, ...allFeedback])
+    createFeedback(newFeedback)
+  }
 
   return (
     <Box
@@ -83,7 +83,7 @@ const FeedbackPage = ({ initialFeedback }) => {
           <Feedback key={feedback.createdAt} {...feedback} />
         ))}
     </Box>
-  );
-};
+  )
+}
 
-export default FeedbackPage;
+export default FeedbackPage

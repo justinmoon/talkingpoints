@@ -1,4 +1,4 @@
-import admin from "firebase-admin";
+import admin from "firebase-admin"
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -9,7 +9,7 @@ if (!admin.apps.length) {
     }),
     // databaseURL: "https://fast-feedback-demo.firebaseio.com",
     databaseURL: "https://talkingpoints-58f16.firebaseapp.com",
-  });
+  })
 }
 
-export default admin.firestore();
+export default admin.firestore()

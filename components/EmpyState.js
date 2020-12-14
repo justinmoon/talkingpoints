@@ -1,5 +1,5 @@
-import React from "react";
-import { Box, Heading, Stack, Text, Button } from "@chakra-ui/core";
+import React from "react"
+import { Box, Heading, Stack, Text, Button } from "@chakra-ui/core"
 
 const EmptyState = () => {
   return (
@@ -43,7 +43,7 @@ const EmptyState = () => {
         </Button>
       </Stack>
     </Box>
-  );
-};
+  )
+}
 
-export default EmptyState;
+export default EmptyState

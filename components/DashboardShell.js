@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import {
   Box,
   Breadcrumb,
@@ -9,11 +9,11 @@ import {
   Flex,
   Link,
   Avatar,
-} from "@chakra-ui/core";
-import { useAuth } from "utils/auth";
+} from "@chakra-ui/core"
+import { useAuth } from "utils/auth"
 
 const DashboardShell = ({ children }) => {
-  const { user } = useAuth();
+  const { user } = useAuth()
   return (
     <Box backgroundColor="gray.100" h="100vh">
       <Flex backgroundColor="white" mb={16} w="full">
@@ -61,7 +61,7 @@ const DashboardShell = ({ children }) => {
         {children}
       </Flex>
     </Box>
-  );
-};
+  )
+}
 
-export default DashboardShell;
+export default DashboardShell

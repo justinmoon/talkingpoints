@@ -1,7 +1,7 @@
-import { useAuth } from "utils/auth";
+import { useAuth } from "utils/auth"
 
 export default function Index() {
-  const auth = useAuth();
+  const auth = useAuth()
   return auth.user ? (
     <div>
       <p>Email: {auth.user.email}</p>
@@ -9,7 +9,7 @@ export default function Index() {
     </div>
   ) : (
     <button onClick={(e) => auth.signinWithGitHub()}>Sign In</button>
-  );
+  )
 }
 
 // <!-- The core Firebase JS SDK is always required and must be listed first -->

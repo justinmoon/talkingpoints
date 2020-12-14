@@ -1,4 +1,4 @@
-import { theme as chakraTheme } from "@chakra-ui/core";
+import { theme as chakraTheme } from "@chakra-ui/core"
 
 const theme = {
   ...chakraTheme,
@@ -11,6 +11,6 @@ const theme = {
     medium: 600,
     bold: 800,
   },
-};
+}
 
-export default theme;
+export default theme
