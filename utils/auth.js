@@ -17,10 +17,10 @@ function useProvideAuth() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
 
-  const handleUser = (rawUser) => {
+  const handleUser = async (rawUser) => {
     setLoading(false)
     if (rawUser) {
-      const user = formatUser(rawUser)
+      const user = await formatUser(rawUser)
       // we don't want to save token in db
       const { token, ...userWithoutToken } = user
       createUser(user.uid, userWithoutToken)
@@ -61,7 +61,14 @@ function useProvideAuth() {
   }
 }
 
-const formatUser = (user) => {
+const getStripeRole = async () => {
+  await firebase.auth().currentUser.getIdToken(true)
+  const decodedToken = await firebase.auth().currentUser.getIdTokenResult()
+  console.log("token", decodedToken)
+  return decodedToken.claims.stripeRole || "free"
+}
+
+const formatUser = async (user) => {
   return {
     uid: user.uid,
     email: user.email,
@@ -69,5 +76,6 @@ const formatUser = (user) => {
     token: user.xa,
     provider: user.providerData[0].providerId,
     photoUrl: user.photoURL,
+    stripeRole: await getStripeRole(),
   }
 }

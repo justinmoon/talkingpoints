@@ -1,11 +1,15 @@
 import { useAuth } from "utils/auth"
+import UpgradeEmptyState from "components/UpgradeEmptyState"
 
 export default function Index() {
   const auth = useAuth()
+  const isPaidAccount = auth.user?.stripeRole !== "free"
   return auth.user ? (
     <div>
       <p>Email: {auth.user.email}</p>
+      <p>Paid: {isPaidAccount}</p>
       <button onClick={(e) => auth.signout()}>Sign Out</button>
+      {!isPaidAccount && <UpgradeEmptyState />}
     </div>
   ) : (
     <button onClick={(e) => auth.signinWithGitHub()}>Sign In</button>
