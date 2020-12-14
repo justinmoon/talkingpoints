@@ -1,8 +1,8 @@
-import firebase from "./firebase-admin"
+import { db } from "./firebase-admin"
 
 export async function getAllFeedback(siteId) {
   try {
-    const snapshot = await firebase
+    const snapshot = await db
       .collection("feedback")
       .where("siteId", "==", siteId)
       .get()
@@ -17,10 +17,24 @@ export async function getAllFeedback(siteId) {
 }
 
 export async function getAllSites() {
-  const snapshot = await firebase.collection("sites").get()
-  const sites = []
-  snapshot.forEach((doc) => {
-    sites.push({ id: doc.id, ...doc.data() })
-  })
+  const snapshot = await db.collection("sites").get()
+
+  const sites = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+
+  return { sites }
+}
+
+export async function getUserSites(uid) {
+  const snapshot = await db
+    .collection("sites")
+    .where("authorId", "==", uid)
+    .get()
+
+  const sites = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+
+  sites.sort((a, b) =>
+    compareDesc(parseISO(a.createdAt), parseISO(b.createdAt))
+  )
+
   return { sites }
 }

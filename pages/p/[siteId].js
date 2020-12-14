@@ -10,7 +10,6 @@ import Feedback from "components/Feedback"
 export async function getStaticProps(context) {
   const siteId = context.params.siteId
   const { feedback } = await getAllFeedback(siteId)
-  console.log("props", feedback)
   return {
     props: {
       initialFeedback: feedback,
@@ -40,10 +39,8 @@ const FeedbackPage = ({ initialFeedback }) => {
   const auth = useAuth()
   const inputEl = useRef(null)
   const [allFeedback, setAllFeedback] = useState(initialFeedback)
-  console.log(allFeedback)
 
   const onSubmit = (e) => {
-    console.log("allFeedback", allFeedback)
     e.preventDefault()
     const newFeedback = {
       author: auth.user.name,

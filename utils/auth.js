@@ -21,7 +21,9 @@ function useProvideAuth() {
     setLoading(false)
     if (rawUser) {
       const user = formatUser(rawUser)
-      createUser(user.uid, user)
+      // we don't want to save token in db
+      const { token, ...userWithoutToken } = user
+      createUser(user.uid, userWithoutToken)
       setUser(user)
       return user
     } else {
@@ -64,6 +66,8 @@ const formatUser = (user) => {
     uid: user.uid,
     email: user.email,
     name: user.displayName,
+    token: user.xa,
     provider: user.providerData[0].providerId,
+    photoUrl: user.photoURL,
   }
 }

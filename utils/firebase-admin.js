@@ -7,9 +7,9 @@ if (!admin.apps.length) {
       private_key: process.env.FIREBASE_PRIVATE_KEY,
       client_email: process.env.FIREBASE_CLIENT_EMAIL,
     }),
-    // databaseURL: "https://fast-feedback-demo.firebaseio.com",
     databaseURL: "https://talkingpoints-58f16.firebaseapp.com",
   })
 }
 
-export default admin.firestore()
+export const db = admin.firestore()
+export const auth = admin.auth()
