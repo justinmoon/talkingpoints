@@ -41,6 +41,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 - Stripe firestore rules update
 - Vercel should use secret variables
 - How to actually make the iframe usable? Right now it doesn't really do anything ...
+- [Nice link for algolia + next.js]https://github.com/algolia/react-instantsearch/tree/master/examples/next)
 
 ## Old rules
 

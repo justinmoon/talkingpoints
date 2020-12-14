@@ -3,14 +3,14 @@ import UpgradeEmptyState from "components/UpgradeEmptyState"
 
 export default function Index() {
   const auth = useAuth()
-  const isPaidAccount = auth.user?.stripeRole !== "free"
+  const isMember = auth.user?.stripeRole === "member"
   return auth.user ? (
     <div>
       <p>Newest</p>
       <p>Email: {auth.user.email}</p>
-      <p>Paid: {isPaidAccount}</p>
+      <p>Paid: {isMember.toString()}</p>
       <button onClick={(e) => auth.signout()}>Sign Out</button>
-      {!isPaidAccount && <UpgradeEmptyState />}
+      {!isMember && <UpgradeEmptyState />}
     </div>
   ) : (
     <button onClick={(e) => auth.signinWithGitHub()}>Sign In</button>

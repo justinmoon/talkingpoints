@@ -2,6 +2,7 @@ import firebase from "./firebase"
 import getStripe from "./stripe"
 
 const db = firebase.firestore()
+const app = firebase.app()
 
 export function updateUser(uid, data) {
   return db.collection("users").doc(uid).update(data)
@@ -34,21 +35,29 @@ export async function createCheckoutSession(uid) {
     .doc(uid)
     .collection("checkout_sessions")
     .add({
-      // this can be removed if you don't want promo codes
+      price: process.env.NEXT_PUBLIC_PRICE_ID,
+      // This can be removed if you don't want promo codes
       allow_promotion_codes: true,
-      // FIXME: better redirect locations ?
       success_url: window.location.origin,
       cancel_url: window.location.origin,
+      // Don't collect billing address
+      billing_address_collection: "auto",
     })
-
   checkoutSessionRef.onSnapshot(async (snap) => {
     const { sessionId } = snap.data()
-
     if (sessionId) {
       const stripe = await getStripe()
       stripe.redirectToCheckout({ sessionId })
     }
-
-    // FIXME: what about if there is no session id?
   })
+}
+
+export async function goToBillingPortal() {
+  const functionRef = app
+    .functions("us-central1")
+    .httpsCallable("ext-firestore-stripe-subscriptions-createPortalLink")
+  const { data } = await functionRef({
+    returnUrl: `${window.location.origin}/account`,
+  })
+  window.location.assign(data.url)
 }
