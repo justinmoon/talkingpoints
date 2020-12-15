@@ -1,4 +1,5 @@
 import firebase from "./firebase"
+import { logger } from "./logger"
 import getStripe from "./stripe"
 
 const db = firebase.firestore()
@@ -31,7 +32,7 @@ export function deleteFeedback(id) {
 
 export async function createCheckoutSession(uid) {
   const checkoutSessionRef = await db
-    .collection("users")
+    .collection("foobar")
     .doc(uid)
     .collection("checkout_sessions")
     .add({
@@ -48,6 +49,8 @@ export async function createCheckoutSession(uid) {
     if (sessionId) {
       const stripe = await getStripe()
       stripe.redirectToCheckout({ sessionId })
+    } else {
+      logger.error("sessionId not present")
     }
   })
 }
