@@ -1,4 +1,5 @@
 import { useAuth } from "utils/auth"
+import { trackGoal } from "utils/analytics"
 import UpgradeEmptyState from "components/UpgradeEmptyState"
 
 export default function Index() {
@@ -13,7 +14,14 @@ export default function Index() {
       {!isMember && <UpgradeEmptyState />}
     </div>
   ) : (
-    <button onClick={(e) => auth.signinWithGitHub()}>Sign In</button>
+    <button
+      onClick={(e) => {
+        trackGoal(process.env.NEXT_PUBLIC_GOAL_LOGIN)
+        auth.signinWithGitHub()
+      }}
+    >
+      Sign In
+    </button>
   )
 }
 
